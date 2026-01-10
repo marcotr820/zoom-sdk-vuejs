@@ -8,10 +8,10 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  base: '/vue-prueba-githubpages-sdk-zoom',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: '/'
 })

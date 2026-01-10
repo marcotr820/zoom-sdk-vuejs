@@ -1,5 +1,6 @@
 <script setup>
 import { ZoomMtg } from '@zoom/meetingsdk';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 ZoomMtg.preLoadWasm();
@@ -83,6 +84,11 @@ const abrirReunion = (idReunion) => {
   // 2. Abrimos la URL en una pestaña nueva (_blank)
   window.open(routeData.href, '_blank');
 };
+
+const activeMeetingIds = ref([
+  'https://miscible-paige-handily.ngrok-free.dev/meeting/6607020734',
+  'https://miscible-paige-handily.ngrok-free.dev/meeting/5281246458'
+]);
 </script>
 
 <template>
@@ -93,6 +99,15 @@ const abrirReunion = (idReunion) => {
   <button @click="abrirReunion(6607020734)">mia</button>
 
   <button @click="abrirReunion(5281246458)">camargo</button>
+
+  <hr>
+  <iframe v-for="id in activeMeetingIds" :key="id"
+    :src="id"
+    frameborder="0"
+    width="100%"
+    height="400px"
+  ></iframe>
+
 </template>
 
 <style scoped>

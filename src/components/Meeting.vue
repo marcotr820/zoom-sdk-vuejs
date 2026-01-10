@@ -13,7 +13,7 @@ const userName = 'Usuario Vue';
 
 onMounted(async () => {
   // 1. Indispensable: Preparar el terreno
-  // ZoomMtg.setZoomJSLib('https://source.zoom.us/lib', '/av');
+  // ZoomMtg.setZoomJSLib('https://source.zoom.us/4.0.0/lib', '/av'); // Usa la versión que tengas en package.json
   ZoomMtg.preLoadWasm();
   ZoomMtg.prepareWebSDK();
 
@@ -29,7 +29,7 @@ async function getSignature() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      meetingNumber: meetingNumber,
+      meetingNumber: meetingNumber.toString(),
       role: role,
       videoWebRtcMode: 1,
     })
@@ -50,7 +50,7 @@ function startMeeting(signature, pass) {
   ZoomMtg.i18n.load('es-ES');
 
   ZoomMtg.init({
-    leaveUrl: 'https://www.google.com/?zx=1767666515485&no_sw_cr=1',
+    leaveUrl: 'https://www.google.com',
     patchJsMedia: true,
     leaveOnPageUnload: true,
     success: (success) => {
