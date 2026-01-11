@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 ZoomMtg.preLoadWasm();
 ZoomMtg.prepareWebSDK();
 
-var authEndpoint = 'http://localhost:4000'
+var authEndpoint = import.meta.env.VITE_API_URL
 var meetingNumber = '5281246458'
 var passWord = 'vJlRNkJ09kb4D6nEbsDmpX2FkyyEGc.1'
 var role = 1
@@ -77,7 +77,7 @@ const abrirReunion = (idReunion) => {
   // 1. Resolvemos la ruta para obtener la URL completa (href)
   // 'Meeting' es el nombre que le diste a la ruta en tu archivo index.js del router
   const routeData = router.resolve({ 
-    name: 'Meeting', 
+    name: 'meeting', 
     params: { id: idReunion } 
   });
 

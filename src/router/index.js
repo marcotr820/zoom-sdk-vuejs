@@ -4,7 +4,7 @@ import Meeting from "../components/Meeting.vue";
 
 const router = createRouter({
   // Usa un string vacío '' o '/' para indicar que la app corre en la raíz
-  history: createWebHistory(import.meta.env.VITE_BASE_URL), 
+  history: createWebHistory(import.meta.env.BASE_URL), 
   routes: [
     {
       path: '/',
@@ -13,7 +13,7 @@ const router = createRouter({
     },
     {
       path: '/meeting/:id',
-      name: 'Meeting',
+      name: 'meeting',
       component: Meeting
     }
   ]

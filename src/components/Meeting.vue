@@ -7,7 +7,7 @@ const route = useRoute();
 const meetingNumber = route.params.id; // Captura el ID de la URL
 
 // Configuración (Idealmente esto vendría de una API o config global)
-const authEndpoint = 'http://localhost:4000';
+const authEndpoint = import.meta.env.VITE_API_URL;
 const role = 1; // Host
 const userName = 'Usuario Vue';
 
