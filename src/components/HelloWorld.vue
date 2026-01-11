@@ -86,8 +86,8 @@ const abrirReunion = (idReunion) => {
 };
 
 const activeMeetingIds = ref([
-  'https://miscible-paige-handily.ngrok-free.dev/meeting/6607020734',
-  'https://miscible-paige-handily.ngrok-free.dev/meeting/5281246458'
+  `${import.meta.env.VITE_CLIENT_URL}/meeting/6607020734`,
+  `${import.meta.env.VITE_CLIENT_URL}/meeting/5281246458`,
 ]);
 </script>
 
