@@ -86,6 +86,9 @@ const abrirReunion = (idReunion) => {
 };
 
 const activeMeetingIds = ref([
+  // `${import.meta.env.VITE_CLIENT_URL}/meeting/9322823095`,
+  `${import.meta.env.VITE_CLIENT_URL}/meeting/6607020734`,
+  `${import.meta.env.VITE_CLIENT_URL}/meeting/5281246458`,
   `${import.meta.env.VITE_CLIENT_URL}/meeting/6607020734`,
   `${import.meta.env.VITE_CLIENT_URL}/meeting/5281246458`,
 ]);
@@ -101,15 +104,32 @@ const activeMeetingIds = ref([
   <button @click="abrirReunion(5281246458)">camargo</button>
 
   <hr>
-  <iframe v-for="id in activeMeetingIds" :key="id"
-    :src="id"
-    frameborder="0"
-    width="100%"
-    height="400px"
-  ></iframe>
+  <div class="grid-container">
+    <iframe v-for="id in activeMeetingIds" :key="id"
+      class="grid-item"
+      :src="id"
+      frameborder="0"
+      width="100%"
+      height="50%"
+    ></iframe>
+  </div>
 
 </template>
 
 <style scoped>
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 por fila */
+  /* gap: 10px; */
+  width: 100%;
+}
+
+.grid-item {
+  background-color: pink;
+  width: 100%;
+  height: 575px; /* ajusta según necesidad */
+  scale: 0.75;
+  border: 5px;
+}
 
 </style>
