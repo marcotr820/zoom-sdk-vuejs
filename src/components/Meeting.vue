@@ -86,5 +86,10 @@ function startMeeting(signature, pass) {
 </template>
 
 <style>
-
+footer#wc-footer {
+    display: none;
+}
+.footer-theme-container {
+  display: none;
+}
 </style>

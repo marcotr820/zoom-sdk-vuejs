@@ -69,8 +69,6 @@ function startMeeting(signature) {
   });
 }
 
-
-
 const router = useRouter();
 
 const abrirReunion = (idReunion) => {
@@ -86,16 +84,30 @@ const abrirReunion = (idReunion) => {
 };
 
 const activeMeetingIds = ref([
-  // `${import.meta.env.VITE_CLIENT_URL}/meeting/9322823095`,
-  `${import.meta.env.VITE_CLIENT_URL}/meeting/6607020734`,
-  `${import.meta.env.VITE_CLIENT_URL}/meeting/5281246458`,
-  `${import.meta.env.VITE_CLIENT_URL}/meeting/6607020734`,
-  `${import.meta.env.VITE_CLIENT_URL}/meeting/5281246458`,
+  // `${import.meta.env.VITE_CLIENT_URL}/meeting/6607020734`,
 ]);
+
+// Lista de reuniones disponibles en la tabla
+const meetings = ref([
+  { id: 6607020734, name: 'Audiencia Sincronización Técnica' },
+  { id: 5281246458, name: 'Sala Revisión de Diseño' },
+]);
+
+const openMeeting = (id) => {
+  if (!activeMeetingIds.value.includes(id)) {
+    activeMeetingIds.value.push(id);
+  }
+};
+
+const getMeetingUrl = (id) => {
+  const baseUrl = window.location.origin;
+  return `${baseUrl}/meeting/${id}`;
+};
+
 </script>
 
 <template>
-  <h1>Zoom Meeting SDK Vue.js Sample</h1>
+  <span>Zoom Meeting SDK Vue.js Sample</span>
 
   <button @click='getSignature'>Join Meeting</button>
 
@@ -104,10 +116,35 @@ const activeMeetingIds = ref([
   <button @click="abrirReunion(5281246458)">camargo</button>
 
   <hr>
+
+    <section>
+      <!-- <h2>Mis Reuniones</h2> -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="meeting in meetings" :key="meeting.id">
+            <td>{{ meeting.id }}</td>
+            <td>{{ meeting.name }}</td>
+            <td>
+              <button @click="openMeeting(meeting.id)">Ver en Iframe</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  <hr />
+
   <div class="grid-container">
     <iframe v-for="id in activeMeetingIds" :key="id"
       class="grid-item"
-      :src="id"
+      :src="getMeetingUrl(id)"
       frameborder="0"
       width="100%"
       height="50%"
@@ -131,5 +168,6 @@ const activeMeetingIds = ref([
   scale: 0.75;
   border: 5px;
 }
+
 
 </style>
