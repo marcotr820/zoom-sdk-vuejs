@@ -83,13 +83,58 @@ function startMeeting(signature, pass) {
     <p>Iniciando sesión de Zoom para la reunión: {{ meetingNumber }}</p>
     <span>Cargando módulos de video...</span>
   </div>
+
+  
+
 </template>
 
-<style>
-footer#wc-footer {
+<style scoped>
+/* footer#wc-footer {
     display: none;
 }
 .footer-theme-container {
   display: none;
+} */
+ .grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 por fila */
+  /* gap: 10px; */
+  width: 100%;
+}
+
+.grid-item {
+  background-color: pink;
+  width: 100%;
+  height: 575px; /* ajusta según necesidad */
+  scale: 0.7;
+  border: 5px;
+}
+/**/
+/* Cabecera Verde */
+.card-header {
+  background-color: #4a6741; /* Verde oliva de la imagen */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+/* Área del Video / Iframe */
+.card-body {
+  flex-grow: 1;
+  position: relative;
+  background-color: #34495e;
+  height: 100%;
+}
+/* Footer con Controles Circulares */
+.card-footer {
+  background-color: #444; /* Gris más oscuro */
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-footer > button {
+ margin: 0;
 }
 </style>

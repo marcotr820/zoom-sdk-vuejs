@@ -104,6 +104,23 @@ const getMeetingUrl = (id) => {
   return `${baseUrl}/meeting/${id}`;
 };
 
+const closeMeeting = (id) => {
+  // 1. Buscar el elemento en el DOM
+  const iframe = document.querySelector(`iframe[src*="${id}"]`) /*as HTMLIFrameElement*/;
+
+  if (iframe) {
+    // 2. Obligar al navegador a abandonar la URL de Zoom
+    iframe.src = "about:blank";
+  }
+
+  // 3. Pequeño delay para que el navegador procese la salida antes de quitar el componente
+  setTimeout(() => {
+    activeMeetingIds.value = activeMeetingIds.value.filter(mId => mId !== id);
+  }, 200);
+
+  // activeMeetingIds.value = activeMeetingIds.value.filter(mId => mId !== id);
+};
+
 </script>
 
 <template>
@@ -142,14 +159,40 @@ const getMeetingUrl = (id) => {
   <hr />
 
   <div class="grid-container">
-    <iframe v-for="id in activeMeetingIds" :key="id"
-      class="grid-item"
-      :src="getMeetingUrl(id)"
-      frameborder="0"
-      width="100%"
-      height="50%"
-    ></iframe>
+    <div v-for="id in activeMeetingIds" :key="id" class="grid-item">
+      <div class="card-header">
+        <span class="meeting-title">Tittle</span>
+        <span class="status-badge">READY</span>
+      </div>
+      <div class="card-body">
+        <iframe 
+          :src="getMeetingUrl(id)"
+          width="100%"
+          height="100%"
+        ></iframe>
+      </div>
+      <div class="card-footer">
+          <button class="icon-btn">🎤</button>
+          <button class="main-btn"></button>
+          <button class="icon-btn">❌</button>
+      </div>
+    </div>
   </div>
+
+  <!-- <section class="iframe-grid">
+    <div v-for="id in activeMeetingIds" :key="id" :id="id" class="iframe-container">
+      <div class="iframe-header">
+        <span>Reunión #{{ id }}</span>
+        <button @click="closeMeeting(id)">Cerrar</button>
+      </div>
+      <iframe
+        :src="getMeetingUrl(id)"
+        frameborder="0"
+        width="100%"
+        height="400px"
+      ></iframe>
+    </div>
+  </section> -->
 
 </template>
 
@@ -165,9 +208,36 @@ const getMeetingUrl = (id) => {
   background-color: pink;
   width: 100%;
   height: 575px; /* ajusta según necesidad */
-  scale: 0.75;
+  scale: 0.7;
   border: 5px;
 }
+/**/
+/* Cabecera Verde */
+.card-header {
+  background-color: #4a6741; /* Verde oliva de la imagen */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+/* Área del Video / Iframe */
+.card-body {
+  flex-grow: 1;
+  position: relative;
+  background-color: #34495e;
+  height: 100%;
+}
+/* Footer con Controles Circulares */
+.card-footer {
+  background-color: #444; /* Gris más oscuro */
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+}
 
+.card-footer > button {
+ margin: 0;
+}
 
 </style>
