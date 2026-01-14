@@ -83,9 +83,6 @@ function startMeeting(signature, pass) {
     <p>Iniciando sesión de Zoom para la reunión: {{ meetingNumber }}</p>
     <span>Cargando módulos de video...</span>
   </div>
-
-  
-
 </template>
 
 <style scoped>
@@ -136,5 +133,9 @@ function startMeeting(signature, pass) {
 
 .card-footer > button {
  margin: 0;
+}
+
+.preview-video {
+  height: 300px !important;
 }
 </style>

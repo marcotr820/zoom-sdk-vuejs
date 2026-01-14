@@ -158,7 +158,7 @@ const closeMeeting = (id) => {
 
   <hr />
 
-  <div class="grid-container">
+  <!-- <div class="grid-container">
     <div v-for="id in activeMeetingIds" :key="id" class="grid-item">
       <div class="card-header">
         <span class="meeting-title">Tittle</span>
@@ -177,7 +177,7 @@ const closeMeeting = (id) => {
           <button class="icon-btn">❌</button>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- <section class="iframe-grid">
     <div v-for="id in activeMeetingIds" :key="id" :id="id" class="iframe-container">
@@ -194,50 +194,43 @@ const closeMeeting = (id) => {
     </div>
   </section> -->
 
+  <div class="grid-container">
+    <div v-for="id in activeMeetingIds" :key="n" class="grid-card">
+      <div class="card-header">cabecera {{ n }}</div>
+      <div class="card-body">
+        <iframe 
+          :src="getMeetingUrl(id)"
+          frameborder="0"
+          width="100%"
+          height="100%"
+        ></iframe>
+      </div>
+      <div class="card-footer"><button @click="closeMeeting(id)">Cerrar</button></div>
+    </div>
+  </div>
+
 </template>
 
 <style scoped>
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 por fila */
-  /* gap: 10px; */
-  width: 100%;
+  gap: 15px;
 }
-
-.grid-item {
-  background-color: pink;
-  width: 100%;
-  height: 575px; /* ajusta según necesidad */
-  scale: 0.7;
-  border: 5px;
-}
-/**/
-/* Cabecera Verde */
-.card-header {
-  background-color: #4a6741; /* Verde oliva de la imagen */
-  padding: 10px;
+.grid-card {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
+  flex-direction: column;
+  scale: .9;
 }
-/* Área del Video / Iframe */
 .card-body {
-  flex-grow: 1;
-  position: relative;
-  background-color: #34495e;
-  height: 100%;
+  height: 570px;
+  /* background-color: skyblue; */
+  overflow: hidden;
 }
-/* Footer con Controles Circulares */
-.card-footer {
-  background-color: #444; /* Gris más oscuro */
-  padding: 15px;
-  display: flex;
-  justify-content: space-around;
+.card-header, .card-footer {
+  background-color: darkgreen;
 }
-
-.card-footer > button {
- margin: 0;
+button {
+  margin: 0;
 }
-
 </style>
